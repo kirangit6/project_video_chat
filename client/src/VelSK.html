@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ffe6eb, #e0f7ff);
+        font-family: "Segoe UI", Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        position: relative;
+        color: #333;
+        z-index: 2;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        font-size: 32px;
+    }
+
+    button {
+        padding: 12px 36px;
+        font-size: 18px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    #yesBtn {
+        background-color: #9be7a1;
+        color: #145a32;
+        margin-right: 20px;
+    }
+
+    #noBtn {
+        background-color: #ffb3b3;
+        color: #7a1c1c;
+        position: absolute;
+    }
+
+    /* Popup */
+    .popup {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+    }
+
+    .popup-box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 320px;
+        animation: popIn 0.4s ease;
+    }
+
+    .popup-box img {
+        width: 100%;
+        border-radius: 16px;
+        margin-bottom: 15px;
+    }
+
+    .popup-box h2 {
+        color: #ff6f91;
+        margin: 0;
+        font-size: 22px;
+    }
+
+    .popup-box p {
+        margin-top: 8px;
+        color: #333;
+        font-size: 15px;
+    }
+
+    @keyframes popIn {
+        from { transform: scale(0.6); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Emojis */
+    .emoji {
+        position: fixed;
+        bottom: -50px;
+        font-size: 28px;
+        animation: floatUp 4s linear forwards;
+        z-index: 3;
+    }
+
+    @keyframes floatUp {
+        to {
+            transform: translateY(-110vh);
+            opacity: 0;
+        }
+    }
+
+    /* Balloons */
+    .balloon {
+        position: fixed;
+        bottom: -100px;
+        width: 40px;
+        height: 55px;
+        border-radius: 50%;
+        animation: balloonUp 6s linear forwards;
+        z-index: 1;
+    }
+
+    .balloon::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 35px;
+        background: #aaa;
+        left: 50%;
+        top: 55px;
+        animation: zigzag 1s ease-in-out infinite;
+    }
+
+    @keyframes balloonUp {
+        to {
+            transform: translateY(-120vh);
+            opacity: 0.9;
+        }
+    }
+
+    @keyframes zigzag {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-4px); }
+        50% { transform: translateX(4px); }
+        75% { transform: translateX(-3px); }
+        100% { transform: translateX(0); }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🥺💖 Will you be my Valentine? 💖🥺</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h2>Best choice 😘💘</h2>
+         <p>This  is for you... </p>
+        <p>💖Saif, you are my comfort, my smile, and my favorite place to be.
+Every laugh, every memory, every little moment with you means more to me than words can explain.
+You make my heart feel at home, and my soul feel calm.😘💘
+I promise to stand by you, cheer for you, and love you in every season of life.
+I don’t need perfect days, I just need you beside me.
+Always you. Always us. Always my Saif💕</p>
+
+<p><strong>I LOVE YOU 😘💘</strong></p>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const popup = document.getElementById("popup");
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * 300 - 150;
+        const y = Math.random() * 200 - 100;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+        popup.style.display = "flex";
+        startEmojis();
+        startBalloons();
+    });
+
+    popup.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+
+    function startEmojis() {
+        const emojis = ["💖","💙","😍","🥰","✨","😘"];
+        for (let i = 0; i < 20; i++) {
+            setTimeout(() => {
+                const emoji = document.createElement("div");
+                emoji.className = "emoji";
+                emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 4000);
+            }, i * 150);
+        }
+    }
+
+    function startBalloons() {
+        const colors = ["#ffadad","#ffd6a5","#caffbf","#9bf6ff","#bdb2ff"];
+        for (let i = 0; i < 25; i++) {
+            setTimeout(() => {
+                const balloon = document.createElement("div");
+                balloon.className = "balloon";
+                balloon.style.left = Math.random() * 100 + "vw";
+                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 6000);
+            }, i * 200);
+        }
+    }
+</script>
+
+</body>
+</html>
